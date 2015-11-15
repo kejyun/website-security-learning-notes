@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>XSS | 網站安全學習筆記</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.0.2">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    
+    
+    <link rel="next" href="../xss/markdown/xss-markdown-README.html" />
+    
+    
+    <link rel="prev" href="../index.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+    
+
+        
+    <div class="book" data-level="1" data-basepath=".." data-revision="Sun Nov 15 2015 18:59:46 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="1" data-path="xss/xss-README.html">
+            
+                
+                    <a href="../xss/xss-README.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        XSS
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="xss/markdown/xss-markdown-README.html">
+            
+                
+                    <a href="../xss/markdown/xss-markdown-README.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        Markdown
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="xss/markdown/xss-markdown-link-attack.html">
+            
+                
+                    <a href="../xss/markdown/xss-markdown-link-attack.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.1.</b>
+                        
+                        連結攻擊
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="xss/markdown/xss-markdown-img-attack.html">
+            
+                
+                    <a href="../xss/markdown/xss-markdown-img-attack.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.2.</b>
+                        
+                        圖片攻擊
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="xss/markdown/xss-markdown-script-attack.html">
+            
+                
+                    <a href="../xss/markdown/xss-markdown-script-attack.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.3.</b>
+                        
+                        Script 攻擊
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="xss/xss-article.html">
+            
+                
+                    <a href="../xss/xss-article.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        文章
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >網站安全學習筆記</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="xss-%E8%B7%A8%E7%B6%B2%E7%AB%99%E6%8C%87%E4%BB%A4%E7%A2%BC">XSS &#x8DE8;&#x7DB2;&#x7AD9;&#x6307;&#x4EE4;&#x78BC;</h1>
+<h2 id="%E8%AA%AA%E6%98%8E">&#x8AAA;&#x660E;</h2>
+<p>&#x8DE8;&#x7DB2;&#x7AD9;&#x6307;&#x4EE4;&#x78BC;&#xFF08;Cross-site scripting&#xFF0C;&#x901A;&#x5E38;&#x7C21;&#x7A31;&#x70BA;XSS&#x6216;&#x8DE8;&#x7AD9;&#x6307;&#x4EE4;&#x78BC;&#x6216;&#x8DE8;&#x7AD9;&#x6307;&#x4EE4;&#x78BC;&#x653B;&#x64CA;&#xFF09;</p>
+<h2 id="%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D-xss">&#x5982;&#x4F55;&#x907F;&#x514D; XSS</h2>
+<p>&#x5728;&#x4F7F;&#x7528;&#x8005;&#x50B3;&#x904E;&#x7684;&#x4F86;&#x5B57;&#x4E32;&#x4E2D;</p>
+<ul>
+<li>&#x53BB;&#x9664;&#x4EFB;&#x4F55; <code>&lt;script&gt;</code> &#x6A19;&#x7C64;</li>
+<li>&#x79FB;&#x9664; <code>onclick</code>, <code>onerror</code>, <code>onmouseenter</code> ... &#x7B49;&#x7B49;&#x4E8B;&#x4EF6;&#x8655;&#x7406;&#x5668;</li>
+<li>&#x4F7F;&#x7528; HTML &#x9ED1;&#x540D;&#x55AE;&#x6216;&#x767D;&#x540D;&#x55AE;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x7559;&#x4E0B;&#x53EF;&#x57F7;&#x884C;&#x7684; HTML &#x7A0B;&#x5F0F;&#x78BC;</li>
+<li>&#x907F;&#x514D;&#x9023;&#x7D50;&#x51FA;&#x73FE; <code>data:text/html;base64</code> &#x7684;&#x8CC7;&#x6599;</li>
+</ul>
+<h2 id="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99">&#x53C3;&#x8003;&#x8CC7;&#x6599;</h2>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%B6%B2%E7%AB%99%E6%8C%87%E4%BB%A4%E7%A2%BC" target="_blank">&#x8DE8;&#x7DB2;&#x7AD9;&#x6307;&#x4EE4;&#x78BC;</a></li>
+</ul>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../index.html" class="navigation navigation-prev " aria-label="Previous page: Introduction"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../xss/markdown/xss-markdown-README.html" class="navigation navigation-next " aria-label="Next page: Markdown"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
