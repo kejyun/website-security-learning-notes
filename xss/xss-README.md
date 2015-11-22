@@ -18,3 +18,4 @@
 * [跨網站指令碼](https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%B6%B2%E7%AB%99%E6%8C%87%E4%BB%A4%E7%A2%BC)
 * [HTML DOM Events](http://www.w3schools.com/jsref/dom_obj_event.asp)
 * [怎样消除 Markdown 的 XSS 漏洞?](http://segmentfault.com/q/1010000000117958)
+* [Cookies are bad for you: Improving web application security](http://sitr.us/2011/08/26/cookies-are-bad-for-you.html)
